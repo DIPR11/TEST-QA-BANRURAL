@@ -39,16 +39,13 @@
   </div>
 
   <script>
-    // Generador de número aleatorio correcto: 1..100
+  
     let randomNumber = Math.floor(Math.random() * 100) + 1;
-
-    // Requerimiento: 10 intentos
     const ATTEMPTS = 10;
 
-    // Referencias (selectores alineados con el HTML)
     const guesses    = document.querySelector('.guesses');
     const lastResult = document.querySelector('.lastResult');
-    const lowOrHi    = document.querySelector('.lowOrHi'); // <- corregido: con punto
+    const lowOrHi    = document.querySelector('.lowOrHi'); 
     const guessSubmit= document.querySelector('.guessSubmit');
     const guessField = document.querySelector('.guessField');
 
@@ -56,7 +53,7 @@
     let resetButton;
 
     function checkGuess(e) {
-      // Parseo + validación robusta: solo enteros, rango 1..100
+      
       const userGuess = Number(guessField.value);
       if (!Number.isInteger(userGuess) || userGuess < 1 || userGuess > 100) {
         lastResult.textContent = 'Ingresa un número válido entre 1 y 100.';
@@ -72,21 +69,18 @@
       guesses.textContent += (guessCount > 1 ? ', ' : '') + userGuess;
 
       if (userGuess === randomNumber) {
-        // Ganaste
         lastResult.textContent = '¡Felicitaciones! Adivinaste el número.';
         lastResult.style.backgroundColor = 'green';
         lowOrHi.textContent = '';
         setGameOver();
       } else if (guessCount === ATTEMPTS) {
-        // Sin intentos restantes
         lastResult.textContent = `Fin del juego. El número era ${randomNumber}.`;
         lastResult.style.backgroundColor = 'black';
         lowOrHi.textContent = '';
         setGameOver();
       } else {
-        // Sigue jugando: mensaje de error y pista
         lastResult.textContent = 'Has perdido este intento.';
-        lastResult.style.backgroundColor = 'crimson'; // rojo para "perdiste este intento"
+        lastResult.style.backgroundColor = 'crimson'; 
         lowOrHi.textContent = (userGuess < randomNumber)
           ? 'El número es MÁS ALTO.'
           : 'El número es MÁS BAJO.';
@@ -96,11 +90,8 @@
       guessField.value = '';
       guessField.focus();
     }
-
-    // Evento correctamente escrito
     guessSubmit.addEventListener('click', checkGuess);
 
-    // (Opcional) Soporte con Enter
     guessField.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') checkGuess(e);
     });
@@ -112,34 +103,28 @@
       resetButton = document.createElement('button');
       resetButton.textContent = 'Comienza un nuevo juego';
       document.body.appendChild(resetButton);
-
-      // Evento correctamente escrito
       resetButton.addEventListener('click', resetGame);
     }
 
     function resetGame() {
       guessCount = 1;
 
-      // Limpiar mensajes
+  
       const resetParas = document.querySelectorAll('.resultParas p');
       for (let i = 0; i < resetParas.length; i++) {
         resetParas[i].textContent = '';
       }
-
-      // Quitar botón reset
       resetButton.parentNode.removeChild(resetButton);
 
-      // Rehabilitar UI
+    
       guessField.disabled = false;
       guessSubmit.disabled = false;
       guessField.value = '';
       guessField.focus();
 
-      // Importante: limpiar fondo (no blanco sobre blanco)
+      
       lastResult.style.backgroundColor = '';
-
-      // Nuevo número 1..100
-      randomNumber = Math.floor(Math.random() * 100) + 1;
+     randomNumber = Math.floor(Math.random() * 100) + 1;
     }
   </script>
 </body>

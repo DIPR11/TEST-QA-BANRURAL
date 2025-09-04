@@ -75,12 +75,12 @@
         setGameOver();
       } else if (guessCount === ATTEMPTS) {
         lastResult.textContent = `Fin del juego. El número era ${randomNumber}.`;
-        lastResult.style.backgroundColor = 'black';
+        lastResult.style.backgroundColor = 'red';
         lowOrHi.textContent = '';
         setGameOver();
       } else {
         lastResult.textContent = 'Has perdido este intento.';
-        lastResult.style.backgroundColor = 'crimson'; 
+        lastResult.style.backgroundColor = 'black'; 
         lowOrHi.textContent = (userGuess < randomNumber)
           ? 'El número es MÁS ALTO.'
           : 'El número es MÁS BAJO.';
